@@ -14,10 +14,10 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "ResourceHolder.h"
-#include "Exception.h"
-#include "ResourceSystem.h"
-#include "Log.h"
+#include <nrEngine/ResourceHolder.h>
+#include <nrEngine/Exception.h>
+#include <nrEngine/ResourceSystem.h>
+#include <nrEngine/Log.h>
 
 namespace nrEngine{
 	

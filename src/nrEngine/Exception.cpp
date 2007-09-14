@@ -13,8 +13,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "Exception.h"
-#include "Engine.h"
+#include <nrEngine/Exception.h>
+#include <nrEngine/Engine.h>
 
 namespace nrEngine{
 

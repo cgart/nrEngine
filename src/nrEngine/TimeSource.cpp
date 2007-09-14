@@ -13,8 +13,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "TimeSource.h"
-#include "Log.h"
+#include <nrEngine/TimeSource.h>
+#include <nrEngine/Log.h>
 
 #include <time.h>
 #if NR_PLATFORM != NR_PLATFORM_WIN32

@@ -4,7 +4,6 @@ TOPDIR= ../..
 # Include defs for defining the variables
 #-----------------------------------------------
 include $(TOPDIR)/Make/Makedefs
-SUBDIRS = events
 
 #-----------------------------------------------
 # We have to built this files into the library

@@ -13,9 +13,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "TimeSourceVirtual.h"
-#include "TimeSource.h"
-#include "Log.h"
+#include <nrEngine/TimeSourceVirtual.h>
+#include <nrEngine/TimeSource.h>
+#include <nrEngine/Log.h>
 
 
 namespace nrEngine{

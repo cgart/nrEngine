@@ -14,8 +14,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "Plugin.h"
-#include "Engine.h"
+#include <nrEngine/Plugin.h>
+#include <nrEngine/Engine.h>
 
 namespace nrEngine {
 

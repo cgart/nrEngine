@@ -14,10 +14,10 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "Engine.h"
-#include "Profiler.h"
-#include "Exception.h"
-#include "TimeSource.h"
+#include <nrEngine/Engine.h>
+#include <nrEngine/Profiler.h>
+#include <nrEngine/Exception.h>
+#include <nrEngine/TimeSource.h>
 
 namespace nrEngine{
 

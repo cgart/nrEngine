@@ -13,8 +13,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "VariadicArgument.h"
-#include "Exception.h"
+#include <nrEngine/VariadicArgument.h>
+#include <nrEngine/Exception.h>
 
 namespace nrEngine {
 

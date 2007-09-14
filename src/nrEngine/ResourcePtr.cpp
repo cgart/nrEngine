@@ -14,9 +14,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "ResourcePtr.h"
-#include "Exception.h"
-#include "ResourceSystem.h"
+#include <nrEngine/ResourcePtr.h>
+#include <nrEngine/Exception.h>
+#include <nrEngine/ResourceSystem.h>
 
 namespace nrEngine{
 	

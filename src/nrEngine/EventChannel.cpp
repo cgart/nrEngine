@@ -13,9 +13,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "EventChannel.h"
-#include "Log.h"
-#include "Profiler.h"
+#include <nrEngine/EventChannel.h>
+#include <nrEngine/Log.h>
+#include <nrEngine/Profiler.h>
 
 namespace nrEngine{
 

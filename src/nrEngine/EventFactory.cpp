@@ -13,8 +13,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "EventFactory.h"
-#include "EventManager.h"
+#include <nrEngine/EventFactory.h>
+#include <nrEngine/EventManager.h>
 
 namespace nrEngine{
 

@@ -11,12 +11,12 @@
  ***************************************************************************/
 
 
-#include "Kernel.h"
-#include "Profiler.h"
-#include "events/KernelTaskEvent.h"
-#include "EventManager.h"
-#include "StdHelpers.h"
-#include "Log.h"
+#include <nrEngine/Kernel.h>
+#include <nrEngine/Profiler.h>
+#include <nrEngine/events/KernelTaskEvent.h>
+#include <nrEngine/EventManager.h>
+#include <nrEngine/StdHelpers.h>
+#include <nrEngine/Log.h>
 
 namespace nrEngine {
 

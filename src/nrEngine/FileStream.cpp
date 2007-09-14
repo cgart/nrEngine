@@ -14,8 +14,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "FileStream.h"
-#include "Log.h"
+#include <nrEngine/FileStream.h>
+#include <nrEngine/Log.h>
 
 namespace nrEngine {
 

@@ -13,8 +13,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "PropertyManager.h"
-#include "Exception.h"
+#include <nrEngine/PropertyManager.h>
+#include <nrEngine/Exception.h>
 
 namespace nrEngine {
 

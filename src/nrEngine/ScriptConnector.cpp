@@ -10,10 +10,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "ScriptConnector.h"
-#include "events/EngineEvent.h"
-#include "ScriptEngine.h"
-#include "Engine.h"
+#include <nrEngine/ScriptConnector.h>
+#include <nrEngine/events/EngineEvent.h>
+#include <nrEngine/ScriptEngine.h>
+#include <nrEngine/Engine.h>
 
 namespace nrEngine{
 

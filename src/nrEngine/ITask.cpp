@@ -14,9 +14,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "ITask.h"
-#include "Log.h"
-#include "Kernel.h"
+#include <nrEngine/ITask.h>
+#include <nrEngine/Log.h>
+#include <nrEngine/Kernel.h>
 
 namespace nrEngine{
 

@@ -17,9 +17,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "../Prerequisities.h"
-#include "../Event.h"
-#include "ScriptEngine.h"
+#include <nrEngine/Prerequisities.h>
+#include <nrEngine/Event.h>
+#include <nrEngine/ScriptEngine.h>
 
 /*!
  * \defgroup sysevent System events

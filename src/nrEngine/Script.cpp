@@ -14,11 +14,11 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "Script.h"
-#include "ScriptEngine.h"
-#include "Clock.h"
-#include "Log.h"
-#include "Kernel.h"
+#include <nrEngine/Script.h>
+#include <nrEngine/ScriptEngine.h>
+#include <nrEngine/Clock.h>
+#include <nrEngine/Log.h>
+#include <nrEngine/Kernel.h>
 #include <boost/algorithm/string/trim.hpp>
 
 namespace nrEngine {

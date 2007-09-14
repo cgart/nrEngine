@@ -11,17 +11,17 @@
  ***************************************************************************/
 
 
-#include "Engine.h"
-#include "Kernel.h"
-#include "Clock.h"
-#include "Profiler.h"
-#include "ResourceManager.h"
-#include "PluginLoader.h"
-#include "FileStreamLoader.h"
-#include "EventManager.h"
-#include "ScriptEngine.h"
-#include "ScriptLoader.h"
-#include "PropertyManager.h"
+#include <nrEngine/Engine.h>
+#include <nrEngine/Kernel.h>
+#include <nrEngine/Clock.h>
+#include <nrEngine/Profiler.h>
+#include <nrEngine/ResourceManager.h>
+#include <nrEngine/PluginLoader.h>
+#include <nrEngine/FileStreamLoader.h>
+#include <nrEngine/EventManager.h>
+#include <nrEngine/ScriptEngine.h>
+#include <nrEngine/ScriptLoader.h>
+#include <nrEngine/PropertyManager.h>
 #include "DefaultScriptingFunctions.cpp"
 
 namespace nrEngine{

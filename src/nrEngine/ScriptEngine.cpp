@@ -14,12 +14,12 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "ScriptEngine.h"
-#include "Log.h"
-#include "events/EngineEvent.h"
-#include "EventManager.h"
-#include "VariadicArgument.h"
-#include "IScript.h"
+#include <nrEngine/ScriptEngine.h>
+#include <nrEngine/Log.h>
+#include <nrEngine/events/EngineEvent.h>
+#include <nrEngine/EventManager.h>
+#include <nrEngine/VariadicArgument.h>
+#include <nrEngine/IScript.h>
 
 namespace nrEngine{
 

@@ -13,8 +13,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "StdHelpers.h"
-#include "ITask.h"
+#include <nrEngine/StdHelpers.h>
+#include <nrEngine/ITask.h>
 
 #include <time.h>
 #if NR_PLATFORM != NR_PLATFORM_WIN32

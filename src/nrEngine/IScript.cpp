@@ -14,9 +14,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "IScript.h"
-#include "Log.h"
-#include "Kernel.h"
+#include <nrEngine/IScript.h>
+#include <nrEngine/Log.h>
+#include <nrEngine/Kernel.h>
 
 namespace nrEngine{
 

@@ -14,10 +14,10 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "ScriptLoader.h"
-#include "Log.h"
-#include "FileStream.h"
-#include "Kernel.h"
+#include <nrEngine/ScriptLoader.h>
+#include <nrEngine/Log.h>
+#include <nrEngine/FileStream.h>
+#include <nrEngine/Kernel.h>
 
 namespace nrEngine{
 

@@ -14,9 +14,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "IThread.h"
-#include "EventManager.h"
-#include "Log.h"
+#include <nrEngine/IThread.h>
+#include <nrEngine/EventManager.h>
+#include <nrEngine/Log.h>
 #include <boost/bind.hpp>
 
 namespace nrEngine{

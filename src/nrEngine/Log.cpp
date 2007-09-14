@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 
-#include "Log.h"
+#include <nrEngine/Log.h>
 #include <iostream>
 #include <time.h>
 

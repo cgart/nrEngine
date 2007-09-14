@@ -1,4 +1,9 @@
 #-----------------------------------------------
+# Global definitions
+#-----------------------------------------------
+VERSION = 0.0.8
+
+#-----------------------------------------------
 # Find out the platform
 #-----------------------------------------------
 SHELL = /bin/sh
@@ -56,6 +61,7 @@ INSTALL_LIB = $(INSTALL)
 INSTALL_DIR = $(INSTALL) -d
 MKDIR = mkdir
 MAKE = make
+LN = ln -s
 
 INSTALL_DIRS = $(INST_LOCATION_LIB) $(INST_LOCATION_INC)
 

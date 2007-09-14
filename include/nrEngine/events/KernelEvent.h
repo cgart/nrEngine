@@ -17,9 +17,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "EngineEvent.h"
-#include "../ITask.h"
-#include "../Kernel.h"
+#include <nrEngine/events/EngineEvent.h>
+#include <nrEngine/ITask.h>
+#include <nrEngine/Kernel.h>
 
 namespace nrEngine{
 

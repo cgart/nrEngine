@@ -14,9 +14,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "Resource.h"
-#include "Exception.h"
-#include "Log.h"
+#include <nrEngine/Resource.h>
+#include <nrEngine/Exception.h>
+#include <nrEngine/Log.h>
 
 namespace nrEngine {
 

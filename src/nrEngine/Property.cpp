@@ -13,9 +13,9 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "Property.h"
-#include "Exception.h"
-#include "Log.h"
+#include <nrEngine/Property.h>
+#include <nrEngine/Exception.h>
+#include <nrEngine/Log.h>
 
 namespace nrEngine {
 

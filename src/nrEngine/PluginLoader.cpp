@@ -14,8 +14,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include "PluginLoader.h"
-#include "Log.h"
+#include <nrEngine/PluginLoader.h>
+#include <nrEngine/Log.h>
 
 namespace nrEngine{
 	
