@@ -1,0 +1,40 @@
+# Project: glfwBinding
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = glfwBinding_private.res
+OBJ  = ../Task.o ../Binding.o $(RES)
+LINKOBJ  = ../Task.o ../Binding.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" ../../../win32-devcpp/libnrEngine.a C:/Dev-Cpp/lib/libopengl32.a ../lib/libglew32.dll.a ../lib/libglfw_win32.a -lopengl32  
+INCS =  -I"C:/Dev-Cpp/include"  -I"D:/nrEngine"  -I"D:/boost_tiny" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"D:/nrEngine"  -I"D:/boost_tiny" 
+BIN  = glfwBinding.dll
+CXXFLAGS = $(CXXINCS) -DBUILD_PLUGIN   -O3
+CFLAGS = $(INCS) -DBUILD_PLUGIN   -O3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before glfwBinding.dll all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libglfwBinding.def
+STATICLIB=libglfwBinding.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --driver-name c++ --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../Task.o: ../Task.cpp
+	$(CPP) -c ../Task.cpp -o ../Task.o $(CXXFLAGS)
+
+../Binding.o: ../Binding.cpp
+	$(CPP) -c ../Binding.cpp -o ../Binding.o $(CXXFLAGS)
+
+glfwBinding_private.res: glfwBinding_private.rc 
+	$(WINDRES) -i glfwBinding_private.rc --input-format=rc -o glfwBinding_private.res -O coff 

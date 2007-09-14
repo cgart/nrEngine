@@ -1,0 +1,8 @@
+Plugins are used to extend the functionality of the engine.
+Plugins are loaded at the running time, so they are fully dynamicaly.
+All new classes could not safely be exported to the application, because
+of different memory used by the applicaton and dyanmic library. Use
+Bindings for this approach.
+
+So plugins are RunningTime-Plugins (Libraries)
+Bindings are LoadTime-Plugins

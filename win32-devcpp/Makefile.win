@@ -1,0 +1,142 @@
+# Project: nrEngine
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = nrEngine_private.res
+OBJ  = ../nrEngine/src/Clock.o ../nrEngine/src/Engine.o ../nrEngine/src/Event.o ../nrEngine/src/EventActor.o ../nrEngine/src/EventChannel.o ../nrEngine/src/EventFactory.o ../nrEngine/src/EventManager.o ../nrEngine/src/Exception.o ../nrEngine/src/FileStream.o ../nrEngine/src/FileStreamLoader.o ../nrEngine/src/IFileSystem.o ../nrEngine/src/IScript.o ../nrEngine/src/IStream.o ../nrEngine/src/ITask.o ../nrEngine/src/Kernel.o ../nrEngine/src/Log.o ../nrEngine/src/ScriptConnector.o ../nrEngine/src/GetTime.o ../nrEngine/src/IThread.o ../nrEngine/src/Plugin.o ../nrEngine/src/PluginLoader.o ../nrEngine/src/Profiler.o ../nrEngine/src/Property.o ../nrEngine/src/Resource.o ../nrEngine/src/ResourceHolder.o ../nrEngine/src/ResourceLoader.o ../nrEngine/src/ResourceManager.o ../nrEngine/src/ResourcePtr.o ../nrEngine/src/Script.o ../nrEngine/src/ScriptEngine.o ../nrEngine/src/ScriptLoader.o ../nrEngine/src/StdHelpers.o ../nrEngine/src/Timer.o ../nrEngine/src/TimeSource.o ../nrEngine/src/events/KernelEvent.o ../nrEngine/src/VariadicArgument.o $(RES)
+LINKOBJ  = ../nrEngine/src/Clock.o ../nrEngine/src/Engine.o ../nrEngine/src/Event.o ../nrEngine/src/EventActor.o ../nrEngine/src/EventChannel.o ../nrEngine/src/EventFactory.o ../nrEngine/src/EventManager.o ../nrEngine/src/Exception.o ../nrEngine/src/FileStream.o ../nrEngine/src/FileStreamLoader.o ../nrEngine/src/IFileSystem.o ../nrEngine/src/IScript.o ../nrEngine/src/IStream.o ../nrEngine/src/ITask.o ../nrEngine/src/Kernel.o ../nrEngine/src/Log.o ../nrEngine/src/ScriptConnector.o ../nrEngine/src/GetTime.o ../nrEngine/src/IThread.o ../nrEngine/src/Plugin.o ../nrEngine/src/PluginLoader.o ../nrEngine/src/Profiler.o ../nrEngine/src/Property.o ../nrEngine/src/Resource.o ../nrEngine/src/ResourceHolder.o ../nrEngine/src/ResourceLoader.o ../nrEngine/src/ResourceManager.o ../nrEngine/src/ResourcePtr.o ../nrEngine/src/Script.o ../nrEngine/src/ScriptEngine.o ../nrEngine/src/ScriptLoader.o ../nrEngine/src/StdHelpers.o ../nrEngine/src/Timer.o ../nrEngine/src/TimeSource.o ../nrEngine/src/events/KernelEvent.o ../nrEngine/src/VariadicArgument.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" C:/Boost/lib/libboost_thread-mgw-mt-s.lib ../Bindings/glfw/win32-devcpp/glfwBinding.a ../Bindings/glfw/lib/libglfw.a  -mwindows 
+INCS =  -I"C:/Dev-Cpp/include"  -I"D:/nrEngine/nrEngine/include"  -I"D:/boost_tiny" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"D:/nrEngine/nrEngine/include"  -I"D:/boost_tiny" 
+BIN  = nrEngine.dll
+CXXFLAGS = $(CXXINCS) -DBUILD_DLL   -O3 -mwindows
+CFLAGS = $(INCS) -DBUILD_DLL   -O3 -mwindows
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before nrEngine.dll all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libnrEngine.def
+STATICLIB=libnrEngine.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --driver-name c++ --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../nrEngine/src/Clock.o: ../nrEngine/src/Clock.cpp
+	$(CPP) -c ../nrEngine/src/Clock.cpp -o ../nrEngine/src/Clock.o $(CXXFLAGS)
+
+../nrEngine/src/Engine.o: ../nrEngine/src/Engine.cpp
+	$(CPP) -c ../nrEngine/src/Engine.cpp -o ../nrEngine/src/Engine.o $(CXXFLAGS)
+
+../nrEngine/src/Event.o: ../nrEngine/src/Event.cpp
+	$(CPP) -c ../nrEngine/src/Event.cpp -o ../nrEngine/src/Event.o $(CXXFLAGS)
+
+../nrEngine/src/EventActor.o: ../nrEngine/src/EventActor.cpp
+	$(CPP) -c ../nrEngine/src/EventActor.cpp -o ../nrEngine/src/EventActor.o $(CXXFLAGS)
+
+../nrEngine/src/EventChannel.o: ../nrEngine/src/EventChannel.cpp
+	$(CPP) -c ../nrEngine/src/EventChannel.cpp -o ../nrEngine/src/EventChannel.o $(CXXFLAGS)
+
+../nrEngine/src/EventFactory.o: ../nrEngine/src/EventFactory.cpp
+	$(CPP) -c ../nrEngine/src/EventFactory.cpp -o ../nrEngine/src/EventFactory.o $(CXXFLAGS)
+
+../nrEngine/src/EventManager.o: ../nrEngine/src/EventManager.cpp
+	$(CPP) -c ../nrEngine/src/EventManager.cpp -o ../nrEngine/src/EventManager.o $(CXXFLAGS)
+
+../nrEngine/src/Exception.o: ../nrEngine/src/Exception.cpp
+	$(CPP) -c ../nrEngine/src/Exception.cpp -o ../nrEngine/src/Exception.o $(CXXFLAGS)
+
+../nrEngine/src/FileStream.o: ../nrEngine/src/FileStream.cpp
+	$(CPP) -c ../nrEngine/src/FileStream.cpp -o ../nrEngine/src/FileStream.o $(CXXFLAGS)
+
+../nrEngine/src/FileStreamLoader.o: ../nrEngine/src/FileStreamLoader.cpp
+	$(CPP) -c ../nrEngine/src/FileStreamLoader.cpp -o ../nrEngine/src/FileStreamLoader.o $(CXXFLAGS)
+
+../nrEngine/src/IFileSystem.o: ../nrEngine/src/IFileSystem.cpp
+	$(CPP) -c ../nrEngine/src/IFileSystem.cpp -o ../nrEngine/src/IFileSystem.o $(CXXFLAGS)
+
+../nrEngine/src/IScript.o: ../nrEngine/src/IScript.cpp
+	$(CPP) -c ../nrEngine/src/IScript.cpp -o ../nrEngine/src/IScript.o $(CXXFLAGS)
+
+../nrEngine/src/IStream.o: ../nrEngine/src/IStream.cpp
+	$(CPP) -c ../nrEngine/src/IStream.cpp -o ../nrEngine/src/IStream.o $(CXXFLAGS)
+
+../nrEngine/src/ITask.o: ../nrEngine/src/ITask.cpp
+	$(CPP) -c ../nrEngine/src/ITask.cpp -o ../nrEngine/src/ITask.o $(CXXFLAGS)
+
+../nrEngine/src/Kernel.o: ../nrEngine/src/Kernel.cpp
+	$(CPP) -c ../nrEngine/src/Kernel.cpp -o ../nrEngine/src/Kernel.o $(CXXFLAGS)
+
+../nrEngine/src/Log.o: ../nrEngine/src/Log.cpp
+	$(CPP) -c ../nrEngine/src/Log.cpp -o ../nrEngine/src/Log.o $(CXXFLAGS)
+
+../nrEngine/src/ScriptConnector.o: ../nrEngine/src/ScriptConnector.cpp
+	$(CPP) -c ../nrEngine/src/ScriptConnector.cpp -o ../nrEngine/src/ScriptConnector.o $(CXXFLAGS)
+
+../nrEngine/src/GetTime.o: ../nrEngine/src/GetTime.cpp
+	$(CPP) -c ../nrEngine/src/GetTime.cpp -o ../nrEngine/src/GetTime.o $(CXXFLAGS)
+
+../nrEngine/src/IThread.o: ../nrEngine/src/IThread.cpp
+	$(CPP) -c ../nrEngine/src/IThread.cpp -o ../nrEngine/src/IThread.o $(CXXFLAGS)
+
+../nrEngine/src/Plugin.o: ../nrEngine/src/Plugin.cpp
+	$(CPP) -c ../nrEngine/src/Plugin.cpp -o ../nrEngine/src/Plugin.o $(CXXFLAGS)
+
+../nrEngine/src/PluginLoader.o: ../nrEngine/src/PluginLoader.cpp
+	$(CPP) -c ../nrEngine/src/PluginLoader.cpp -o ../nrEngine/src/PluginLoader.o $(CXXFLAGS)
+
+../nrEngine/src/Profiler.o: ../nrEngine/src/Profiler.cpp
+	$(CPP) -c ../nrEngine/src/Profiler.cpp -o ../nrEngine/src/Profiler.o $(CXXFLAGS)
+
+../nrEngine/src/Property.o: ../nrEngine/src/Property.cpp
+	$(CPP) -c ../nrEngine/src/Property.cpp -o ../nrEngine/src/Property.o $(CXXFLAGS)
+
+../nrEngine/src/Resource.o: ../nrEngine/src/Resource.cpp
+	$(CPP) -c ../nrEngine/src/Resource.cpp -o ../nrEngine/src/Resource.o $(CXXFLAGS)
+
+../nrEngine/src/ResourceHolder.o: ../nrEngine/src/ResourceHolder.cpp
+	$(CPP) -c ../nrEngine/src/ResourceHolder.cpp -o ../nrEngine/src/ResourceHolder.o $(CXXFLAGS)
+
+../nrEngine/src/ResourceLoader.o: ../nrEngine/src/ResourceLoader.cpp
+	$(CPP) -c ../nrEngine/src/ResourceLoader.cpp -o ../nrEngine/src/ResourceLoader.o $(CXXFLAGS)
+
+../nrEngine/src/ResourceManager.o: ../nrEngine/src/ResourceManager.cpp
+	$(CPP) -c ../nrEngine/src/ResourceManager.cpp -o ../nrEngine/src/ResourceManager.o $(CXXFLAGS)
+
+../nrEngine/src/ResourcePtr.o: ../nrEngine/src/ResourcePtr.cpp
+	$(CPP) -c ../nrEngine/src/ResourcePtr.cpp -o ../nrEngine/src/ResourcePtr.o $(CXXFLAGS)
+
+../nrEngine/src/Script.o: ../nrEngine/src/Script.cpp
+	$(CPP) -c ../nrEngine/src/Script.cpp -o ../nrEngine/src/Script.o $(CXXFLAGS)
+
+../nrEngine/src/ScriptEngine.o: ../nrEngine/src/ScriptEngine.cpp
+	$(CPP) -c ../nrEngine/src/ScriptEngine.cpp -o ../nrEngine/src/ScriptEngine.o $(CXXFLAGS)
+
+../nrEngine/src/ScriptLoader.o: ../nrEngine/src/ScriptLoader.cpp
+	$(CPP) -c ../nrEngine/src/ScriptLoader.cpp -o ../nrEngine/src/ScriptLoader.o $(CXXFLAGS)
+
+../nrEngine/src/StdHelpers.o: ../nrEngine/src/StdHelpers.cpp
+	$(CPP) -c ../nrEngine/src/StdHelpers.cpp -o ../nrEngine/src/StdHelpers.o $(CXXFLAGS)
+
+../nrEngine/src/Timer.o: ../nrEngine/src/Timer.cpp
+	$(CPP) -c ../nrEngine/src/Timer.cpp -o ../nrEngine/src/Timer.o $(CXXFLAGS)
+
+../nrEngine/src/TimeSource.o: ../nrEngine/src/TimeSource.cpp
+	$(CPP) -c ../nrEngine/src/TimeSource.cpp -o ../nrEngine/src/TimeSource.o $(CXXFLAGS)
+
+../nrEngine/src/events/KernelEvent.o: ../nrEngine/src/events/KernelEvent.cpp
+	$(CPP) -c ../nrEngine/src/events/KernelEvent.cpp -o ../nrEngine/src/events/KernelEvent.o $(CXXFLAGS)
+
+../nrEngine/src/VariadicArgument.o: ../nrEngine/src/VariadicArgument.cpp
+	$(CPP) -c ../nrEngine/src/VariadicArgument.cpp -o ../nrEngine/src/VariadicArgument.o $(CXXFLAGS)
+
+nrEngine_private.res: nrEngine_private.rc 
+	$(WINDRES) -i nrEngine_private.rc --input-format=rc -o nrEngine_private.res -O coff 

@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>nrEngine plus newReality Demo</title>
+    <meta content="">
+    <style></style>
+  </head>
+<body>
+<center><font size="+3"><b>new Reality (nrEngine)</b></font><br>
+	<i>...Life Is A Bad Game But The Grafic Quality Is Amazing...</i>
+</center>
+
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+
+nrEngine is first OpenGL-Game-Engine I wrote. nrEngine can be used to write or to learn how to write games. This page was written for students to show them how to work with this engine.<br>
+<br>
+<a href="doxy/index.html">Here</a> you can find the automatic generated documentation of the engine. This document will just describe the basic functionality of the engine and will hopefully helps you to start developing games with nrEngine.<br><br>
+<a href="doxy/index.html">Full source doumentation</a>
+<br><br><br>
+<a href="#1">1. What is nrEngine and newReality?</a><br>
+<a href="#2">2. What do I need for nrEngine?</a><br>
+<a href="#3">3. How to use the Engine?</a><br>
+  
+<br><br>
+
+<br>
+<hr size="1">
+<br><br>
+
+<p><font size="+1"><b>
+	1. What is nrEngine and newReality?
+	</b></font>
+</p>
+<b>newReality</b> is a demo written for the rendering competition in winter semester 2004/05. This demo shows a lot of effects used in todays games. There are also a lot of other great demos created for this competition. All of them you can find here: <a href="http://www.grovis.de/cg1.html" target="_new">CG1-Homepage</a>
+<br><br>
+<b>nrEngine</b> is small game engine extracted from the demo after that competition. I tried to write this engine very easy to understand and very easy to use. Also this engine was written by reading all of the great internet sites describing how modern engines should looks like. So you can be sure that this engine will stay modern for next couple of months :-)<br>
+At now the engine is very small and has got only basic functionality. But by having enough of time and also if you are interested in continuing of development of this engine it can grows up and could also be used in our free games. Comercial use is not excluded :-)<br>
+The engine is written in C++. If you do not have any knowledge of C++ you should learn it!!! Also this Engine was written by using some of so calling <i>advanced C++ Features</i>. So if you want to understand the code you shoul dhave more than only basic knowledge of C++ language.<br>
+
+<br>
+<hr size="1">
+<br><br>
+<p><font size="+1"><b>
+	2. What do I need for nrEngine?
+	</b></font>
+</p>
+At now there is no tested support for Windows operating system. That means the engine was written to be platform independent but this feature was never tested. So there also can be compiler errors if you would try to compile the engine on MS Win.<br>
+So you need any Unix system at least to get things working. Better if you use Linux because there was also no tests for other Unix derivates<br>
+To compile the engine you need following addiditional libraries:
+<ul>
+	<li><a href="http://www.opengl.org">OpenGL</a> 3D-Rendering library
+	<li><a href="http://www.libsdl.org">libSDL</a> very easy to use framework
+	<li><a href="http://www.boost.org">Boost-Libs</a> some helpful libraries
+	<li>libjpeg, libpng to have support for loading images
+</ul>
+You also need good compiler, I use gcc-3.3.5 and it works fine.<br>
+
+
+<br>
+<hr size="1">
+<br><br>
+<p><font size="+1"><b>
+	3. How to use the Engine?
+	</b></font>
+</p>
+nrEngine contains a lot of classes which can be used separately from the engine. There are for example Camera, Mathematics or Framework classes. But because nrEngine is called game engine, so you have real help to write your own games with that engine. But because I beginn to say how to use you have to understand the basics of any game.<br>
+Each game has a game loop. In this loop you have to check for user input and to update state of the game (like physics or something else). This loop is running until game stops. Each cycle in this loop is an one frame. So nrEngine gives you support to write your own parts of the main loop. Also game loop is included in the engine.<br>
+In our engine you have a <b>Kernel</b> and <b>Tasks</b>. Kernel is something like the main/game loop. Tasks are this parts which have to be updated each frame. This could be User Input, Rendering or something else. So if you have an understatement how operating system works you would also understand what do I mean here with kernel and tasks. If you have any objects that has to be updated in each frame, so you have to derive this classes from <b>nrITask</b>-Interface. For example:<br>
+<br>
+<code>
+class userInputUpdater : public nrITask {<br>
+...<br>
+}<br>
+</code>
+<br>So you have also to support some functions which are pure virtual in our nrITask-Interface. Description of each such function you can find in the automatic generated description of the engine. There is also an <b>nrISingletonTask</b>-Interface which is exactly the same but will exists only one time in the memory.<br>
+In you main function, where you initialize your application, you write something like:<br><br>
+<code>
+	nrEngineInit();<br>
+	<br>
+	shared_ptr < nrITask > task (new userInputUpdater());<br>
+	task->_taskPriority = NR_PRIORITY_VERY_HIGH;<br>
+	nrKernel.AddTask(task);<br>
+	...<br>
+	nrKernel.AddTask(someOtherTasks);<br>
+	<br>
+	nrKernel.Execute();<br>
+	<br>
+	nrEngineDelete();	
+</code><br><br>
+What this code do:<br>
+First of all you initialize the nrEngine (<code>nrEngineInit();</code>). This will initialize the kernel and some other esential parts of the engine. Kernel is a singleton class. So there can be only one object in the memory of this class.<br>
+Then you create new instance of your class which has to be updated in each frame. nrEngine is using smart pointers everywhere. So if you do not know how shared_ptr works you have to read the manual of <i>boos.org</i>-Libraries. This great pointer has garbage collection integrated and allows us to share object between different owners. And after setting the priority to you task we add this task to our kernel. Priority of nrEninge's tasks shows you which task will be executed sooner. Higher priority means to be executed sooner that a task with lower priority. So you can define rendering task with lowest priority and user input task for exampel with higher priority.<br>
+Then you executes the kernel <code>nrKernel.Execute();</code> and give programm control to nrEngine's kernel system. This will update the tasks according to their priority. Our kernel supports also changing the priority on the fly and suspending the task. Each suspended task will not be updated until he will be resumed. After there is no more task in kernels task list, for example if you killed couple of them through other tasks, the kernel will stop.<br>
+After all you release all reserved memory for the nrEngine with <code>nrEngineDelete();</code>. It is not essential to call this because of smart pointers. Our engine will delete each self by exiting the application. But it is more elegant if you use this function.<br>
+<br><br>
+So this is the main using of the engine. nrEngine will use by default logging functionality. That means that you can read in log files what does the engine done until yet. Therefor you have to initialize the logging engine by calling:<br>
+<br><code>
+	nrLog.Init("../log/", "../log/msgs.log");
+</code><br>
+<br>
+This opens log files in the directory ../log and will write logging informations in it. Second parameters is a file name of file having default messages stored to allow to write predefined messages by only giving their ids.<br>
+
+<br>
+<hr size="1">
+<br><br>
+
+Actually this is all what you essentialy need to get nrEngine started. The documentation of all other classes will help you to understand how to use them. This document contains at now only small description how to get started. If you have more questions just send it to me and I will try to explain them to you.<br>
+
+
+</body>
+</html>

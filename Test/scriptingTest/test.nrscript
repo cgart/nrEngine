@@ -1,0 +1,26 @@
+
+// ist ein test
+test1  // comment
+test2	// comment3
+
+
+
+// subscript 1
+{
+	test3
+
+	// subscript 2
+	{
+		test4
+	}
+	test3
+}
+
+test5
+
+// noch ein subscript
+{
+	test3
+}
+
+test6

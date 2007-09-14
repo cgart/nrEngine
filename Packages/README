@@ -1,0 +1,15 @@
+Packages are components of the engine which can not be exported as a Plugin.
+Plugins are loaded dynamicaly at the runtime, however packages are
+dynamicaly linked by compiling the application using nrEngine.
+
+
+Packages provide some new functionality to the engine by declaring new 
+classes and methods which can be used within an application.
+i.e. new type of event classes NewEvent which has later to be casted from Event
+to NewEvent class type. If we use a library as plugin, so load it at
+runtime, we can not cast them properly because of problem of two separate
+memories for the plugin and application. However if we link at at
+compiletime so they can safely be casted.
+
+So think on Packages as LoadTime-Plugins (dll/so) files.
+Plugins are RunningTime-Plugins

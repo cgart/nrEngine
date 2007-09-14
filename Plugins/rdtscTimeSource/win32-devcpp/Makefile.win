@@ -1,0 +1,40 @@
+# Project: rdtscTimeSource
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = ../Cpu.o ../Plugin.o ../TimeSource.o $(RES)
+LINKOBJ  = ../Cpu.o ../Plugin.o ../TimeSource.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" --no-export-all-symbols --add-stdcall-alias  ../../../win32-devcpp/libnrEngine.a  
+INCS =  -I"C:/Dev-Cpp/include"  -I"D:/boost_tiny"  -I"D:/nrEngine" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"D:/boost_tiny"  -I"D:/nrEngine" 
+BIN  = rdtscTimeSource.dll
+CXXFLAGS = $(CXXINCS) -DBUILDING_DLL=1  
+CFLAGS = $(INCS) -DBUILDING_DLL=1  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before rdtscTimeSource.dll all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=librdtscTimeSource.def
+STATICLIB=librdtscTimeSource.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --driver-name c++ --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../Cpu.o: ../Cpu.cpp
+	$(CPP) -c ../Cpu.cpp -o ../Cpu.o $(CXXFLAGS)
+
+../Plugin.o: ../Plugin.cpp
+	$(CPP) -c ../Plugin.cpp -o ../Plugin.o $(CXXFLAGS)
+
+../TimeSource.o: ../TimeSource.cpp
+	$(CPP) -c ../TimeSource.cpp -o ../TimeSource.o $(CXXFLAGS)

@@ -1,0 +1,17 @@
+How to install:
+
+Install in default directory (/usr/local)
+	scons
+	scons install
+	
+Install in prefered directory (/bla/bla)
+	scons
+	scons prefix=/blah/blah install
+
+To build debug version call:
+	scons debug=1
+
+For more help on parameters call
+	scons -h
+	
+ by problems contact me on arti_tevs@yahoo.de
