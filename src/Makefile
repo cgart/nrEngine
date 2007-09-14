@@ -53,7 +53,7 @@ CPPFILES= Clock.cpp\
 		KernelEvent.cpp
 
 # define used vairables
-TARGET=  libnrEngine.so
+TARGET= $(TOPDIR)/lib/libnrEngine.so
 INCPATH += -I../include
 CFLAGS += -fPIC
 LIBS += -ldl -lboost_thread
