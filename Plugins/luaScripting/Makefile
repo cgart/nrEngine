@@ -15,7 +15,7 @@ CPPFILES = Plugin.cpp\
 			
 # some definitions
 TARGET = luaScripting.so
-INCPATH += -I../include
+INCPATH += -I$(TOPDIR)/include
 CFLAGS += -fPIC
 LIBS = -llua
 #LDFLAGS = $(LIBPATH) -shared -llua

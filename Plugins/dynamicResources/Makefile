@@ -19,7 +19,7 @@ endif
 			
 # some definitions
 TARGET = dynamicResources.so
-INCPATH += -I../include
+INCPATH += -I$(TOPDIR)/include
 CFLAGS += -fPIC
 LIBS = 
 #LDFLAGS = $(LIBPATH) -shared -llua

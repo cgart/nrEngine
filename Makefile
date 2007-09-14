@@ -1,7 +1,7 @@
 
 include Make/Makedefs
 
-SUBDIRS = nrEngine Packages Plugins
+SUBDIRS = include src Packages Plugins
 
 include Make/Makedirrules
 		

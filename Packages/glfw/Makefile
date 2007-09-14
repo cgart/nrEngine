@@ -17,7 +17,7 @@ INCFILES = Package.h\
 		
 # create the target
 TARGET=  $(TOPDIR)/lib/libnrEngineGLFW.so
-INCPATH += -I./ -I../../
+INCPATH += -I./ -I$(TOPDIR)/include
 CFLAGS += -fPIC
 LDFLAGS = -shared -Llib -Wl,-Bstatic -lglfw -Wl,-Bdynamic
 
