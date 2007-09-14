@@ -70,7 +70,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = ../nrEngine/
+INPUT                  = ../include/nrEngine/ ../src/nrEngine/
 FILE_PATTERNS          = *.h *.cpp
 RECURSIVE              = YES
 EXCLUDE                =
