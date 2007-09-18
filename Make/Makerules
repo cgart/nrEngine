@@ -70,9 +70,9 @@ __install:
 		src="$(INSTALL_SRC)"; \
 		for f in $$src; \
 		do \
-			if [ -f $$f ]; \
+			if [ -f "$(TOPDIR)/lib/$$f" ]; \
 			then \
-				$(INSTALL_CMD) $$f $(INSTALL_DST); \
+				$(INSTALL_CMD) $(TOPDIR)/lib/$$f $(INSTALL_DST); \
 				echo "Installing $$f in $(INSTALL_DST)"; \
 			fi; \
 		done; '
@@ -105,7 +105,7 @@ __uninstall:
 		src="$(INSTALL_SRC)"; \
 		for f in $$src; \
 		do \
-			if [ -f $$f ]; \
+			if [ -f "$(TOPDIR)/lib/$$f" ]; \
 			then \
 				echo "Remove $$f from $(INSTALL_DST)"; \
 				rm -f $(INSTALL_DST)/$$f; \
