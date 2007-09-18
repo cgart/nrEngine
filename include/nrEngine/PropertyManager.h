@@ -57,11 +57,12 @@ namespace nrEngine{
 			void createGroup(const std::string& name);
 
 			/**
-			 * Get number of properties in a certain group
-			 *
-			 * @param [group] Unique name of a property group
+			 * Check whenever a property exists in the database.
+			 * @param name Name of the property
+			 * @param [group] Unique name of the group, where to look for the property
 			 **/
-			//int32 getPropertyCount(const std::string& group = std::string());
+			bool isPropertyRegistered(const std::string& name, const std::string& group = std::string()) const;
+			bool isPropertyRegisteredByFullname(const std::string& fullname) const;
 
 			/**
 			 * Get property list of properties of certain group.
@@ -77,7 +78,7 @@ namespace nrEngine{
 			 * @param [group] Unique name of the group
 			 **/
 			Property& getProperty(const std::string& name, const std::string& group = std::string());
-			Property& getPropertyByFullName(const std::string& fullname);
+			Property& getPropertyByFullname(const std::string& fullname);
 			
 			/**
 			* Get the property directly. @see PropertyManager::getProperty()
@@ -110,8 +111,8 @@ namespace nrEngine{
 			 * @param value Valeu to be set for the property
 			 * @param fullname Fullname of the property (i.e. "group.name")
 			 **/
-			void setByFullName(const boost::any& value, const std::string& fullname);
-			void setByFullName(const Property& property,const std::string& name);
+			void setByFullname(const boost::any& value, const std::string& fullname);
+			void setByFullname(const Property& property,const std::string& name);
 
 			/**
 			 * Get the value directly from the database.
@@ -129,15 +130,30 @@ namespace nrEngine{
 			 * @see get()
 			 **/
 			template<typename T>
-			NR_FORCEINLINE T getByFullName(const std::string& name);
+			NR_FORCEINLINE T getByFullname(const std::string& name);
+
+			/**
+			 * Extract the group name from a fullname of a property. The fullname is 
+			 * a combination like: "group.property". So this function will look for 
+			 * the first occurence of '.' and will return the group name back.
+			 * If no group name exists, then empty string will be given back
+			 * @param fullname Combined name of the property (also known as Fullname)
+			**/
+			std::string getGroupName(const std::string& fullname) const;
+
+			/**
+			 * Same as getGroupName(), but extracts the property name from the combination.
+			 **/
+			std::string getPropertyName(const std::string& fullname) const;
 
 		private:
-						
+
 			//! This describey the type of our property map
 			typedef std::map<std::string, PropertyList> PropertyMap;
 
 			//! Here we store our properties
 			PropertyMap mPropertyMap;
+
 	};
 	
 
@@ -167,11 +183,11 @@ namespace nrEngine{
 
 	//----------------------------------------------------------------------------------
 	template<typename T>
-	NR_FORCEINLINE T PropertyManager::getByFullName(const std::string& fullname)
+	NR_FORCEINLINE T PropertyManager::getByFullname(const std::string& fullname)
 	{	
 		try{
 			// get property value
-			boost::any& v = getPropertyByFullName(fullname).getValue();
+			boost::any& v = getPropertyByFullname(fullname).getValue();
 			
 			// check if property is empty
 			if (v.empty())

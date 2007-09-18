@@ -1,17 +1,12 @@
-How to install:
+First you have to compile the engine:
+	make
 
-Install in default directory (/usr/local)
-	scons
-	scons install
-	
-Install in prefered directory (/bla/bla)
-	scons
-	scons prefix=/blah/blah install
+if you want to install the engine later in a non default directory, then call
+	make prefix=/path/as/prefix
 
-To build debug version call:
-	scons debug=1
+To install engine type:
+	make install (to install into default directory /usr/local)
+	make INST_LOCATION=/path/to/install (to install into another directory)
 
-For more help on parameters call
-	scons -h
-	
- by problems contact me on arti_tevs@yahoo.de
+
+by problems contact me on arti_tevs@yahoo.de

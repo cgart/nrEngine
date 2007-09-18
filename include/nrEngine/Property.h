@@ -73,7 +73,7 @@ namespace nrEngine{
 			 * only know to which group this property belongs. If property
 			 * is not handled by manager, so fullname is equal name
 			 **/
-			NR_FORCEINLINE const std::string& getFullName() const { return mFullName; }
+			NR_FORCEINLINE const std::string& getFullname() const { return mFullname; }
 
 			/**
 			 * Get value of the property
@@ -147,7 +147,7 @@ namespace nrEngine{
 			std::string mName;
 
 			//! Full name of property (group.name)
-			std::string mFullName;
+			std::string mFullname;
 			
 			//! Value holding by the property
 			boost::any	mValue;

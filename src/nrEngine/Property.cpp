@@ -26,19 +26,19 @@ namespace nrEngine {
 	}
 
 	//----------------------------------------------------------------------------------
-	Property::Property(const std::string& name) : mName(name), mFullName(name), mUserData(NULL)
+	Property::Property(const std::string& name) : mName(name), mFullname(name), mUserData(NULL)
 	{
 
 	}
 
 	//----------------------------------------------------------------------------------
-	Property::Property (const std::string& name, const boost::any& value) : mName(name), mFullName(name), mValue(value), mUserData(NULL)
+	Property::Property (const std::string& name, const boost::any& value) : mName(name), mFullname(name), mValue(value), mUserData(NULL)
 	{
 
 	}
 
 	//----------------------------------------------------------------------------------
-	Property::Property(const Property& p):mName(p.getName()), mFullName(p.getFullName()), mValue(p.getValue()), mUserData(p.mUserData)
+	Property::Property(const Property& p):mName(p.getName()), mFullname(p.getFullname()), mValue(p.getValue()), mUserData(p.mUserData)
 	{
 
 	}
@@ -53,7 +53,7 @@ namespace nrEngine {
 	//----------------------------------------------------------------------------------
 	bool Property::operator==(const Property& p)
 	{
-		return (p.getFullName() == mFullName && p.getValue().type() == mValue.type());
+		return (p.getFullname() == mFullname && p.getValue().type() == mValue.type());
 	}
 
 	

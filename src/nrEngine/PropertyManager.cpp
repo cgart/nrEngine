@@ -50,7 +50,7 @@ namespace nrEngine {
 	}
 
 	//----------------------------------------------------------------------------------
-	Property& PropertyManager::getPropertyByFullName(const std::string& fullname)
+	Property& PropertyManager::getPropertyByFullname(const std::string& fullname)
 	{
 		// iterate through all groups
 		PropertyMap::iterator it = mPropertyMap.begin();
@@ -59,7 +59,7 @@ namespace nrEngine {
 			// search for such an element
 			PropertyList::iterator jt = it->second.begin();
 			for (; jt != it->second.end(); jt++)
-				if (jt->getFullName() == fullname)
+				if (jt->getFullname() == fullname)
 				{
 					return *jt;
 				}
@@ -67,7 +67,53 @@ namespace nrEngine {
 
 		// we have not found any such element, so create one
 		NR_Log(Log::LOG_ENGINE, Log::LL_WARNING, "PropertyManager: Property with fullname '%s' is not registered, so create it in default group", fullname.c_str());
-		return getProperty(fullname, "");		
+		return getProperty(fullname, "");
+	}
+
+	//----------------------------------------------------------------------------------
+	bool PropertyManager::isPropertyRegistered(const std::string& name, const std::string& group) const
+	{
+		// iterate through all groups
+		PropertyMap::const_iterator it = mPropertyMap.begin();
+		for (; it != mPropertyMap.end(); it++)
+		{
+			// if we are checking in a certain group
+			if (it->first == group)
+			{
+				return it->second.exists(name);
+			}
+		}
+		return false;
+	}
+
+	//----------------------------------------------------------------------------------
+	bool PropertyManager::isPropertyRegisteredByFullname(const std::string& fullname) const
+	{
+		// extract the group name
+		return isPropertyRegistered(getPropertyName(fullname), getGroupName(fullname));
+	}
+
+	//----------------------------------------------------------------------------------
+	std::string PropertyManager::getGroupName(const std::string& fullname) const
+	{
+		// find the first occurence of . character
+		uint32 pos = fullname.find('.');
+
+		if (pos == std::string::npos || pos == 0) return std::string();
+
+		return fullname.substr(0, pos - 1);
+	}
+
+	//----------------------------------------------------------------------------------
+	std::string PropertyManager::getPropertyName(const std::string& fullname) const
+	{
+		// find the first occurence of . character
+		uint32 pos = fullname.find('.');
+
+		if (pos == std::string::npos) return fullname;
+		if (pos == 0) pos = -1;
+
+		return fullname.substr(pos + 1);
 	}
 	
 	//----------------------------------------------------------------------------------
@@ -76,16 +122,16 @@ namespace nrEngine {
 		Property& p = getProperty(name, group);
 		p.copyDataOnly(property);
 		p.mName = name;
-		p.mFullName = group + std::string(".") + name;		
+		p.mFullname = group + std::string(".") + name;		
 	}
 	
 	//----------------------------------------------------------------------------------
-	void PropertyManager::setByFullName(const Property& property, const std::string& fullname)
+	void PropertyManager::setByFullname(const Property& property, const std::string& fullname)
 	{
 		// get property by fullname
-		Property& p = getPropertyByFullName(fullname);
+		Property& p = getPropertyByFullname(fullname);
 		p.copyDataOnly(property);
-		p.mFullName = fullname;
+		p.mFullname = fullname;
 		if (p.mName.length() == 0) p.mName = fullname;
 	}
 
@@ -101,10 +147,10 @@ namespace nrEngine {
 	}
 
 	//----------------------------------------------------------------------------------
-	void PropertyManager::setByFullName(const boost::any& value, const std::string& fullname)
+	void PropertyManager::setByFullname(const boost::any& value, const std::string& fullname)
 	{
 		// get property
-		Property& p = getPropertyByFullName(fullname);
+		Property& p = getPropertyByFullname(fullname);
 
 		// set new value
 		p.mValue = value;
