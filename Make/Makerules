@@ -60,12 +60,12 @@ __installdirs:
 		done; '
 	
 __installlib:
-	@ $(MAKE) INSTALL_SRC="$(INSTALL_SRC_LIB)" INSTALL_DST="$(INSTALL_DST_LIB)" INSTALL_CMD?="$(INSTALL_LIB)" __install
+	@ $(MAKE) INSTALL_SRC="$(INSTALL_SRC_LIB)" INSTALL_DST="$(INSTALL_DST_LIB)" INSTALL_CMD?="$(INSTALL_LIB)" __installlib_
 
 __installinc:
 	@ $(MAKE) INSTALL_SRC="$(INSTALL_SRC_INC)" INSTALL_DST="$(INSTALL_DST_INC)" INSTALL_CMD?="$(INSTALL_INC)" __install
 
-__install:
+__installlib_:
 	@ $(SHELL) -c ' \
 		src="$(INSTALL_SRC)"; \
 		for f in $$src; \
@@ -77,13 +77,25 @@ __install:
 			fi; \
 		done; '
 
+__install:
+	@ $(SHELL) -c ' \
+		src="$(INSTALL_SRC)"; \
+		for f in $$src; \
+		do \
+			if [ -f $$f ]; \
+			then \
+				$(INSTALL_CMD) $$f $(INSTALL_DST); \
+				echo "Installing $$f in $(INSTALL_DST)"; \
+			fi; \
+		done; '
+
 #-----------------------------------------------
 # Uninstall rules for removing the package
 #-----------------------------------------------
 uninstall: __uninstalllib __uninstallinc __uninstalldirs
 
 __uninstalllib:
-	@ $(MAKE) INSTALL_SRC="$(INSTALL_SRC_LIB)" INSTALL_DST="$(INSTALL_DST_LIB)" __uninstall
+	@ $(MAKE) INSTALL_SRC="$(INSTALL_SRC_LIB)" INSTALL_DST="$(INSTALL_DST_LIB)" __uninstalllib_
 
 __uninstallinc:
 	@ $(MAKE) INSTALL_SRC="$(INSTALL_SRC_INC)" INSTALL_DST="$(INSTALL_DST_INC)" __uninstall
@@ -100,12 +112,29 @@ __uninstalldirs:
 			fi; \
 		done; '
 	
-__uninstall:
+__uninstalllib_:
 	@ $(SHELL) -c ' \
 		src="$(INSTALL_SRC)"; \
 		for f in $$src; \
 		do \
 			if [ -f "$(TOPDIR)/lib/$$f" ]; \
+			then \
+				echo "Remove $$f from $(INSTALL_DST)"; \
+				rm -f $(INSTALL_DST)/$$f; \
+			fi; \
+		done; \
+		empty="ls $(INSTALL_DST)"; \
+		if [ -z "$$empty" ]; then \
+			echo "$(INSTALL_DST) is empty, so remove it"; \
+			rm -rf $(INSTALL_DST); \
+		fi; '
+
+__uninstall:
+	@ $(SHELL) -c ' \
+		src="$(INSTALL_SRC)"; \
+		for f in $$src; \
+		do \
+			if [ -f $$f ]; \
 			then \
 				echo "Remove $$f from $(INSTALL_DST)"; \
 				rm -f $(INSTALL_DST)/$$f; \
