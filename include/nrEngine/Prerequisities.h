@@ -56,8 +56,6 @@ namespace nrEngine{
 	#define NR_SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
 	#define NR_SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
 	
-	#define NR_ENGINE_PROFILING
-	
 	//------------------------------------------------------------------------------
 	//	Basic-type definitions used in the engine
 	//------------------------------------------------------------------------------
