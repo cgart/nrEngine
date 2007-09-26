@@ -20,7 +20,8 @@ namespace nrEngine{
 	//-------------------------------------------------------------------------
 	Log::Log()
 	{
-		_logLevel = LL_NORMAL;
+        _logLevel = LL_NORMAL;
+        _bInitialized = false;        
 	}
 	
 	//-------------------------------------------------------------------------
@@ -51,7 +52,9 @@ namespace nrEngine{
 		_pluginLog.open((logPath + "/plugin.log").c_str(), std::ios::out);// | ios::app);
 			
 		log (LOG_ANYTHING, LL_DEBUG, "Logging activated");
-				
+
+        _bInitialized = true;
+                    
 		return OK;
 	}
 	
@@ -59,15 +62,8 @@ namespace nrEngine{
 	void Log::log(LogTarget target, const char* msg, ...)
 	{
 		// check whenver we have already initialised the log engine
-		/*if (logPath.length() == 0){
-			static bool warned = false;
-			if (warned == false){
-				logIt(LOG_CONSOLE, LL_WARNING, "You can not log messages before you initialize the log engine");
-				warned = true;
-			}
-			return;
-		}*/
-			
+        if (!_bInitialized) return;
+        			
 		// get messages 
 		va_list args; 
 		va_start(args,msg);
@@ -89,16 +85,8 @@ namespace nrEngine{
 	//-------------------------------------------------------------------------
 	void Log::log(LogTarget target, LogLevel level, const char* msg, ...)
 	{
-	
-		// check whenver we have already initialised the log engine
-		/*if (logPath.length() == 0){
-			static bool warned = false;
-			if (warned == false){
-				logIt(LOG_CONSOLE, LL_WARNING, "You can not log messages before you initialize the log engine");
-				warned = true;
-			}
-			return;
-		}*/
+        // check whenver we have already initialised the log engine
+        if (!_bInitialized) return;
 			
 		// get messages 
 		va_list args; 
@@ -119,8 +107,8 @@ namespace nrEngine{
 	}
 
 	//-------------------------------------------------------------------------
-	void Log::logIt(int32 target, LogLevel level, const char *msg){
-
+	void Log::logIt(int32 target, LogLevel level, const char *msg)
+    {
 		// check whenever the coming message is allowed to be logged
 		if (level > _logLevel) return;
 		

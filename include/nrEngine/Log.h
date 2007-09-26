@@ -185,7 +185,9 @@ namespace nrEngine{
 
 			// get log level string
 			std::string getLevelStr(LogLevel level);
-			
+
+            // check whenever logging was initialized
+            bool _bInitialized;
 	};
 	
 }; // end namespace
