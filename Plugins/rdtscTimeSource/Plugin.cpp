@@ -22,16 +22,41 @@ boost::shared_ptr<rdtscTimeSource>	mTimeSource;
 boost::shared_ptr<TimeSource>		mOldTimeSource;
 
 //std::vector<Plugin::PlgMethod>		mMethods;
+uint32 syncInterval = 0;
+uint32 syncTime = 10;
+
 
 //---------------------------------------------------------
 // Initialize the plugin
 //---------------------------------------------------------
-extern "C" int plgInitialize(Engine* root)
+extern "C" int plgInitialize(Engine* root, PropertyList* args)
 {	
 	mRoot = root;
     mOldTimeSource = mRoot->sClock()->getTimeSource();
 
-	
+    if (args){
+        if (args->exists("sync_interval"))
+        {
+            Property& prop = (*args)["luastate"];
+            try{
+                syncInterval = prop.get<uint32>();
+                NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: sync_interval=%d", syncInterval);
+            }catch(boost::bad_any_cast& err){
+                NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: sync_interval is given, but has a bad type");
+            }
+        }
+        if (args->exists("sync_duration"))
+        {
+            Property& prop = (*args)["luastate"];
+            try{
+                syncTime = prop.get<uint32>();
+                NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: sync_duration=%d", syncTime);
+            }catch(boost::bad_any_cast& err){
+                NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: sync_duration is given, but has a bad type");
+            }
+        }
+    }
+    
 	// create cpu instance
 	mCpu.reset(new Cpu());
 	NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: Retrieve CPU Information");
@@ -40,7 +65,8 @@ extern "C" int plgInitialize(Engine* root)
 	
 	// create Time Source
 	mTimeSource.reset( new rdtscTimeSource(mCpu) );
-
+    mTimeSource->setSyncDuration(syncTime);
+    
     // check whenever CPU does support the thing
     if (mTimeSource->isSupported())
     {		    
@@ -49,7 +75,7 @@ extern "C" int plgInitialize(Engine* root)
 	    mRoot->sClock()->setTimeSource(mTimeSource);
 
         // let sync the timesource every 500 ms
-        mRoot->sClock()->setSyncInterval(500);
+        mRoot->sClock()->setSyncInterval(syncInterval);
         
 	    // declare new function to the scripting engine
 	    //std::vector<ScriptParam> param;

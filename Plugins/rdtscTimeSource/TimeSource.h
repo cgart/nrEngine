@@ -80,7 +80,10 @@ public:
      * Check if the rdtsc instruction is supported
      **/
     bool isSupported() { return _isSupported; }
-       
+
+    //! Set the duration in ms how long to sync (require to compute the cpu frequency properly)
+    void setSyncDuration(uint32 time) { _syncDuration = time; }
+    
 private:
 
     //! Is supported
@@ -91,7 +94,9 @@ private:
 
 	//! Cpu to get info
 	boost::shared_ptr<Cpu>	mCpu;
-		
+
+    //! Duration in ms how long to sync
+    uint32 _syncDuration;      
 };
 
 #endif

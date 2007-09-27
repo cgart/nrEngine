@@ -30,6 +30,7 @@ rdtscTimeSource::rdtscTimeSource(boost::shared_ptr<Cpu> cpu) : TimeSource()
 {
 	mCpu = cpu;
     _isSupported = false;
+    _syncDuration = 10;
     	
 	// check whenever we have got the high performance counter support
 	if (mCpu->isRDTSC())
@@ -86,6 +87,6 @@ void rdtscTimeSource::sync()
 {
 	_syncTime = _currentTime;
 	reset();
-	mCpu->calculateSpeed(10);
+	mCpu->calculateSpeed(_syncDuration);
 }
 
