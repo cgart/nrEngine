@@ -2,6 +2,6 @@ TOPDIR = ..
 
 include $(TOPDIR)/Make/Makedefs
 
-SUBDIRS = luaScripting dynamicResources
+SUBDIRS = luaScripting dynamicResources rdtscTimeSource
 	
 include $(TOPDIR)/Make/Makedirrules

@@ -29,12 +29,14 @@ using namespace nrEngine;
 rdtscTimeSource::rdtscTimeSource(boost::shared_ptr<Cpu> cpu) : TimeSource()
 {
 	mCpu = cpu;
-	
+    _isSupported = false;
+    	
 	// check whenever we have got the high performance counter support
 	if (mCpu->isRDTSC())
 	{
 		NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: It seems your CPU supports the \"rdtsc\" instruction");
 		NR_Log(Log::LOG_PLUGIN, "rdtscTimeSource: High perfromance time counter will be used!");
+        _isSupported = true;      
 	}
 }
 
@@ -49,8 +51,8 @@ rdtscTimeSource::~rdtscTimeSource()
 float64 rdtscTimeSource::getTime()
 {
 	// get current time
-	if (mCpu->isRDTSC()){
-		
+	if (mCpu->isRDTSC())
+    {
 		// retrive current ticks number
 		uint64 now = _startTimeRT;
 		mCpu->rdtsc(now);
@@ -62,7 +64,7 @@ float64 rdtscTimeSource::getTime()
 		uint64 b = now - _startTimeRT;
 				
 		// calculate current time in seconds
-		_currentTime = (0.001 * float64(b)) / float64(mCpu->getSpeed()) + _syncTime;
+		_currentTime = (0.001 * float64(b)) / float64(mCpu->getSpeed()) + _resetTime + _syncTime;
 	}
 	
 	// return it back
@@ -70,13 +72,13 @@ float64 rdtscTimeSource::getTime()
 }
 
 //------------------------------------------------------------------------
-void rdtscTimeSource::reset()
+void rdtscTimeSource::reset(float64 startValue)
 {
 	// check whenever we have got the RDTSC support
 	if (mCpu->isRDTSC()){
 		mCpu->rdtsc(_startTimeRT);
 	}
-	
+	_resetTime = startValue;
 }
 
 //------------------------------------------------------------------------

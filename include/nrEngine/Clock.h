@@ -225,7 +225,10 @@ namespace nrEngine{
 		* counters in addidition to CPU speed stepping functionality of the processor unit.
 		**/
 		void setSyncInterval(uint32 milliseconds);
-		
+
+        //! Return the sync interval in millisconds
+        uint32 getSyncInterval() const { return syncInterval; }
+        
 		/**
 		 * Reset the clock. The clock time will be resetted to the given time.
 		 * @param resetToTime Reset the clock to the given time value

@@ -17,9 +17,8 @@
 //----------------------------------------------------------------------------------
 // Includes
 //----------------------------------------------------------------------------------
-#include <nrEngine.h>
+#include <nrEngine/nrEngine.h>
 #include "Cpu.h"
-#include <boost/shared_ptr.hpp>
 
 
 using namespace nrEngine;
@@ -65,7 +64,7 @@ public:
 	* You do not have to call this method, clock will do it automaticaly, if
 	* it is needed.
 	**/
-	void reset();
+	void reset(float64 startValue = 0.0);
 
 	/**
 	* Syncing the time source means we get the current time store it as sync time point
@@ -76,9 +75,17 @@ public:
 	* Clock-Engine will decide by itself when to sync, so time source shouldn't do it.
 	**/
 	void sync();
-	
+
+    /**
+     * Check if the rdtsc instruction is supported
+     **/
+    bool isSupported() { return _isSupported; }
+       
 private:
 
+    //! Is supported
+    bool _isSupported;
+    
 	//! Store the start time as 64Bit integer, for rtdsc counter
 	uint64	_startTimeRT;
 
