@@ -22,7 +22,7 @@ boost::shared_ptr<rdtscTimeSource>	mTimeSource;
 boost::shared_ptr<TimeSource>		mOldTimeSource;
 
 //std::vector<Plugin::PlgMethod>		mMethods;
-uint32 syncInterval = 0;
+uint32 syncInterval = 500;
 uint32 syncTime = 10;
 
 
