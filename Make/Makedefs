@@ -37,8 +37,8 @@ bindir = $(exec_prefix)/bin
 libdir = $(exec_prefix)/lib
 incdir = $(exec_prefix)/include
 
-INCPATH ?= -I$(prefix)/include -I/usr/local/include -I/usr/include
-LIBPATH ?= -L$(prefix)/lib -L/usr/local/lib -L/usr/lib
+INCPATH ?= -I$(TOPDIR)/include -I$(prefix)/include -I/usr/local/include -I/usr/include
+LIBPATH ?= -L$(TOPDIR)/lib -L$(prefix)/lib -L/usr/local/lib -L/usr/lib
 
 INST_LOCATION = $(prefix)
 INST_LOCATION_BIN = $(INST_LOCATION)/bin
