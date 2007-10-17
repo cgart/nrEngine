@@ -59,7 +59,7 @@ namespace nrEngine{
 			if (args.size() > 3) force = boost::lexical_cast<bool>(args[3]);
 
 			// run
-			if (!Engine::sScriptEngine()->execute(name, once, force))
+			if (Engine::sScriptEngine()->execute(name, once, force) != OK)
 				return ScriptResult(std::string("Can not execute script ") + name);
 		}catch(boost::bad_lexical_cast s){
 			return ScriptResult(std::string("Wrong parameter value! "));

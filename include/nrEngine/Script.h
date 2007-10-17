@@ -192,7 +192,6 @@ namespace nrEngine{
 
 				//! arguments of the command
 				std::vector<std::string> args;
-
 			} Command;
 
 			//! Here we store our timed commands

@@ -145,7 +145,7 @@ namespace nrEngine {
 					scr.unlockResource();
 					mSubscripts.push_back(scr);
 				}else{
-					NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Script (%s): Subscript could not be created. Maybe no proper loader exists. Script will not run.\n", getResourceName().c_str());
+					NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Script (%s): Subscript could not be created. Maybe no proper loader exists. Script will not run.", getResourceName().c_str());
 					return std::string("");
 				}
 				
@@ -201,7 +201,7 @@ namespace nrEngine {
 					// if script could be created, so fill it and store, to execute later
 					if (scr.isNull())
 					{
-						NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Script (%s): Subscript could not be created. Maybe no proper loader exists. Script will not run.\n", getResourceName().c_str());
+						NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Script (%s): Subscript could not be created. Maybe no proper loader exists. Script will not run.", getResourceName().c_str());
 						return std::string("");
 					}else{
 						scr.lockResource();
@@ -298,7 +298,7 @@ namespace nrEngine {
 							mTimedCommand.push_back(cmd);
 					}
 				}catch(...){
-					NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Script: Unknown syntax in \"%s\"\n", line.c_str());
+					NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Script: Unknown syntax in \"%s\"", line.c_str());
 					return SCRIPT_PARSE_ERROR;
 				}
 
@@ -463,7 +463,11 @@ namespace nrEngine {
 				it = mTimedCommandFifo.erase(it);
 
 				// call the commando
-				Engine::sScriptEngine()->call(mTimedCommand[id].cmd, mTimedCommand[id].args);
+				ScriptResult res = Engine::sScriptEngine()->call(mTimedCommand[id].cmd, mTimedCommand[id].args);
+                if (res.size())
+                {
+                    NR_Log(Log::LOG_CONSOLE, Log::LL_DEBUG, "%s: %s", getResourceName().c_str(), (res.get<std::string>(0)).c_str());
+                }
 			}else
 				it ++;
 		}
@@ -478,7 +482,11 @@ namespace nrEngine {
 			// check if we have a stop commando
 			if (mCommand[id].cmd != std::string("_stop_"))
 			{
-				Engine::sScriptEngine()->call(mCommand[id].cmd, mCommand[id].args);
+				ScriptResult res = Engine::sScriptEngine()->call(mCommand[id].cmd, mCommand[id].args);
+                if (res.size())
+                {
+                    NR_Log(Log::LOG_CONSOLE, Log::LL_DEBUG, "%s: %s", getResourceName().c_str(), (res.get<std::string>(0)).c_str());
+                }
 			}else{
 				Engine::sKernel()->RemoveTask(this->getTaskID());
 			}
@@ -540,7 +548,13 @@ namespace nrEngine {
 				mCommandFifo.pop_back();
 
 				// execute it
-				Engine::sScriptEngine()->call(mCommand[id].cmd, mCommand[id].args);
+				ScriptResult res = Engine::sScriptEngine()->call(mCommand[id].cmd, mCommand[id].args);
+
+                // check for return code
+                if (res.size())
+                {
+                    NR_Log(Log::LOG_CONSOLE, Log::LL_DEBUG, "%s: %s", getResourceName().c_str(), (res.get<std::string>(0)).c_str());
+                }
 			}
 
 			// reset the list and check if the task is removed from the kernel
