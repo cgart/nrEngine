@@ -34,6 +34,9 @@ namespace nrEngine {
 		mRunningTimeLength = 0;
 		mFirstRunTimed = true;
 		mScriptStartTime = 0;
+
+        mTimer = Engine::sClock()->createTimer();
+        mTimer->setPause(true);
 	}
 
 	//----------------------------------------------------------------------------------
@@ -419,14 +422,12 @@ namespace nrEngine {
 		// update time
 		mTimer->setPause(false);
 		mTime = mTimer->getTime();
-		
-		//printf("%s (%f - %f)\n", getResourceName().c_str(), mTime, mScriptStartTime);
 
 		// do execute the script only if start time was passed
 		if (mScriptStartTime > mTime)
 		{
 			// if the script is waiting for the start, then it runs in a loop mode 
-			setRunOnce(false);
+			//setRunOnce(false);
 			
 			// do nothing at now
 			return OK;
@@ -529,6 +530,15 @@ namespace nrEngine {
 	//----------------------------------------------------------------------------------
 	Result Script::fullRun()
 	{
+        // check if start time already passed
+        mTimer->setPause(false);
+        mTime = mTimer->getTime();
+
+        // do execute the script only if start time was passed
+        if (mScriptStartTime > mTime)
+        {
+            return OK;
+        }
 
 		// check for looped script
 		static bool warned = false;
@@ -589,8 +599,8 @@ namespace nrEngine {
 		}
 		
 		// intialize the timer and pause it
-		mTimer = Engine::sClock()->createTimer();
-		mTimer->setPause(true);
+		//mTimer = Engine::sClock()->createTimer();
+		//mTimer->setPause(true);
 		
 		// reset the script, so it can run
 		resetCommandFifo();
