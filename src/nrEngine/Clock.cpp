@@ -226,7 +226,7 @@ namespace nrEngine{
 				nextSyncTime = currentTime + static_cast<float64>(syncInterval) / 1000.0;
 			}
 
-		} while (useMaxRate && (currentTime - lastCurrentTime) < invMaxFrameRate);
+		} while (!useFixRate && useMaxRate && (currentTime - lastCurrentTime) < invMaxFrameRate);
 
 		// set the last current time we used to the current time
 		lastCurrentTime = currentTime;
@@ -394,8 +394,16 @@ namespace nrEngine{
 	//------------------------------------------------------------------------
 	float64 Clock::_getFilteredFrameDuration () const{
 		
-		if (useFixRate){
-			return 1.0f/(fixFrameRate);
+		if (useFixRate)
+        {
+            // if not using an upper bounder, then
+            //if (!useMaxRate)
+    			return 1.0f/(fixFrameRate);
+
+            // if max frame rate is used, then check which time to deliver
+            //else{
+            //    if (
+            //}
 		}
 		
 		float64 totalFrameTime = 0;

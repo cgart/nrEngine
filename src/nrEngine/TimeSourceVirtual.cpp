@@ -31,6 +31,18 @@ namespace nrEngine{
 	{
 	}
 		
+    //------------------------------------------------------------------------
+    void TimeSourceVirtual::addTimeStep(float64 step)
+    {
+        _currentTime += step;
+    }
+
+    //------------------------------------------------------------------------
+    void TimeSourceVirtual::setTimeStep(float64 step)
+    {
+        _timeStep = step;
+    }
+
 	//------------------------------------------------------------------------
 	float64 TimeSourceVirtual::getTime()
 	{

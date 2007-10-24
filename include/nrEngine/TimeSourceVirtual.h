@@ -58,6 +58,17 @@ namespace nrEngine{
 		
 		void notifyNextFrame();
 		
+        /**
+        * Add a time value to the current one. This gives us a control about
+        * the speed of this timer 
+        **/
+        void addTimeStep(float64 step);
+
+        /**
+        * Set new time step 
+        **/
+        void setTimeStep(float64 step);
+
 	protected:
 
 		//! Fix time step
