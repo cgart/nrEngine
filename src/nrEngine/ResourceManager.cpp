@@ -292,7 +292,7 @@ namespace nrEngine{
 			const std::string& resourceType,PropertyList* params,ResourceLoader loader)
 	{
 
-		NR_Log(Log::LOG_ENGINE, Log::LL_DEBUG, "ResourceManager: Load resource %s of type %s from file %s", name.c_str(), resourceType.c_str(), fileName.c_str());
+		NR_Log(Log::LOG_ENGINE, "ResourceManager: Load resource %s of type %s from file %s", name.c_str(), resourceType.c_str(), fileName.c_str());
 
 		// check for right parameters
 		if (name.length() == 0 || fileName.length() == 0)
