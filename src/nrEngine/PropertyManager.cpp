@@ -46,7 +46,25 @@ namespace nrEngine {
 	//----------------------------------------------------------------------------------
 	Property& PropertyManager::getProperty(const std::string& name, const std::string& group)
 	{
-		return mPropertyMap[group][name];
+        // get list which should contain the property
+        PropertyList& list = mPropertyMap[group];
+
+        // check if such a property exists in the database
+        PropertyList::iterator it = list.begin();
+        for (; it != list.end(); it++) 
+            if (it->getName() == name) return *it;
+
+        // we haven't found this property hence generate new one
+        Property p;
+        p.mName = name;
+        p.mFullname = group + std::string(".") + name;
+
+        // some debug info
+        NR_Log(Log::LOG_ENGINE, Log::LL_DEBUG, "Property: Initialize new property '%s.%s'", group.c_str(), name.c_str());
+
+        // add property into the list and return the reference
+        list.push_back(p);
+		return list.back();
 	}
 
 	//----------------------------------------------------------------------------------
@@ -67,7 +85,7 @@ namespace nrEngine {
 
 		// we have not found any such element, so create one
 		NR_Log(Log::LOG_ENGINE, Log::LL_WARNING, "PropertyManager: Property with fullname '%s' is not registered, so create it in default group", fullname.c_str());
-		return getProperty(fullname, "");
+		return getProperty(fullname, ".");
 	}
 
 	//----------------------------------------------------------------------------------
