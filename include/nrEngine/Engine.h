@@ -170,7 +170,7 @@ namespace nrEngine{
 			 /**
 			 * Check whenever the engine'S singleton was created before
 			 **/
-			static bool valid(void* p = sSingleton.get(), char* name = "Engine", bool showWarn = true);
+			static bool valid(void* p = sSingleton.get(), char* name = (char*)"Engine", bool showWarn = true);
 			 
 			/**
 			 * Release the singleton object

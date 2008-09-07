@@ -73,56 +73,56 @@ namespace nrEngine{
 	//--------------------------------------------------------------------------
 	 Log* Engine::sLog()
 	{
-		valid(_logger, "Log");
+		valid(_logger, (char*)"Log");
 		return _logger;
 	}
 
 	//--------------------------------------------------------------------------
 	 Kernel* Engine::sKernel()
 	{
-		valid(_kernel, "Kernel");
+		valid(_kernel, (char*)"Kernel");
 		return _kernel;
 	}
 
 	//--------------------------------------------------------------------------
 	 Clock* Engine::sClock()
 	{
-		valid(_clock, "Clock");
+		valid(_clock, (char*)"Clock");
 		return _clock;
 	}
 
 	//--------------------------------------------------------------------------
 	 Profiler* Engine::sProfiler()
 	{
-		valid(_profiler, "Profiler");
+		valid(_profiler, (char*)"Profiler");
 		return _profiler;
 	}
 
 	//--------------------------------------------------------------------------
 	 ResourceManager* Engine::sResourceManager()
 	{
-		valid(_resmgr, "ResourceManager");
+		valid(_resmgr, (char*)"ResourceManager");
 		return _resmgr;
 	}
 
 	//--------------------------------------------------------------------------
 	 EventManager* Engine::sEventManager()
 	{
-		valid(_event, "EventManager");
+		valid(_event, (char*)"EventManager");
 		return _event;
 	}
 
 	//--------------------------------------------------------------------------
 	 ScriptEngine* Engine::sScriptEngine()
 	{
-		valid(_script, "ScriptEngine");
+		valid(_script, (char*)"ScriptEngine");
 		return _script;
 	}
 
 	//--------------------------------------------------------------------------
 	PropertyManager* Engine::sPropertyManager()
 	{
-		valid(_propmgr, "PropertyManager");
+		valid(_propmgr, (char*)"PropertyManager");
 		return _propmgr;
 	}
 
@@ -135,7 +135,7 @@ namespace nrEngine{
 		{
 			NR_EXCEPT(OUT_OF_MEMORY, "Log system could not be created. Probably memory is full", "Engine::Engine()");
 		}
-		
+
 		// create property manager
 		_propmgr = (new PropertyManager());
 		if (_propmgr == NULL)
@@ -168,6 +168,8 @@ namespace nrEngine{
 	//------------------------------------------------------------------------
 	Engine::~Engine()
 	{
+        stopEngine();
+
 		// remove default scripting methods
 		DefaultScriptingFunctions::delMethods();
 
@@ -185,10 +187,10 @@ namespace nrEngine{
 
 		// delete the event system
 		delete _event;
-		
+
 		// remove property manager
 		delete _propmgr;
-		
+
 		// remove profiler
 		delete _profiler;
 
@@ -207,25 +209,25 @@ namespace nrEngine{
 	void Engine::stopEngine()
 	{
 		// give log information
-		_logger->log(Log::LOG_ENGINE, "nrEngine stopped");
+		_logger->log(Log::LOG_ENGINE, (char*)"nrEngine stopped");
 
 		// stop kernel tasks
 		_kernel->StopExecution();
-
+        _kernel->OneTick();
 	}
 	//------------------------------------------------------------------------
 	bool Engine::initializeEngine()
 	{
 		// give some info about the underlying engine
-		NR_Log(Log::LOG_ENGINE | Log::LOG_CONSOLE | Log::LOG_KERNEL, "nrEngine v%s - %s", convertVersionToString(nrEngineVersion).c_str(), NR_VERSION_NAME);
-		
+		NR_Log(Log::LOG_ENGINE | Log::LOG_CONSOLE | Log::LOG_KERNEL, (char*)"nrEngine v%s - %s", convertVersionToString(nrEngineVersion).c_str(), NR_VERSION_NAME);
+
 		// initialize the clock
 		SharedPtr<TimeSource> timeSource(new TimeSource());
 
 		// initialize profiler singleton
 		_profiler = (new Profiler(timeSource));
 		if (_profiler == NULL)
-			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Profiler singleton could not be created. Probably memory is full");
+			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, (char*)"Profiler singleton could not be created. Probably memory is full");
 
 		// now add the clock into kernel
 		_clock->setTimeSource(timeSource);
@@ -235,7 +237,7 @@ namespace nrEngine{
 		// initialize resource manager singleton
 		_event = (new EventManager());
 		if (_event == NULL)
-			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Event manager singleton could not be created. Probably memory is full");
+			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, (char*)"Event manager singleton could not be created. Probably memory is full");
 
 		_event->createChannel(NR_DEFAULT_EVENT_CHANNEL);
 		_event->setTaskType(TASK_SYSTEM);
@@ -243,23 +245,23 @@ namespace nrEngine{
 
 		// initialise default scripting methods
 		DefaultScriptingFunctions::addMethods();
-		
+
 		// initialize resource manager singleton
 		_resmgr = (new ResourceManager());
 		if (_resmgr == NULL)
-			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Resource manager singleton could not be created. Probably memory is full");
+			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, (char*)"Resource manager singleton could not be created. Probably memory is full");
 
 		// Add the file reading functionality
 		ResourceLoader fileLoader (new FileStreamLoader());
-		_resmgr->registerLoader("FileStreamLoader", fileLoader);
+		_resmgr->registerLoader((char*)"FileStreamLoader", fileLoader);
 
 		// create an instance of plugin loader and add it to the resource manager
 		ResourceLoader loader ( new PluginLoader() );
-		_resmgr->registerLoader("PluginLoader", loader);
+		_resmgr->registerLoader((char*)"PluginLoader", loader);
 
 		// create simple scripting language instancies
 		ResourceLoader scriptLoader( new ScriptLoader() );
-		_resmgr->registerLoader("ScriptLoader", scriptLoader);
+		_resmgr->registerLoader((char*)"ScriptLoader", scriptLoader);
 
 		return true;
 	}
@@ -269,7 +271,7 @@ namespace nrEngine{
 	{
 
 		// log info
-		_logger->log(Log::LOG_ENGINE, "nrEngine started");
+		_logger->log(Log::LOG_ENGINE, (char*)"nrEngine started");
 
 		// start the kernel
 		_kernel->Execute();
@@ -290,21 +292,21 @@ namespace nrEngine{
 		// check if the engine is initialized
 		if (_resmgr == NULL)
 		{
-			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, "Engine was not initialized properly");
+			NR_Log(Log::LOG_ENGINE, Log::LL_ERROR, (char*)"Engine was not initialized properly");
 			return false;
 		}
 
 		// try to load the resource and check for the error code
-		IResourcePtr plg = _resmgr->loadResource(name, "Plugins", path + file, "Plugin");
+		IResourcePtr plg = _resmgr->loadResource(name, (char*)"Plugins", path + file, (char*)"Plugin");
 
 		return true;
 	}
 
-	
+
 	//------------------------------------------------------------------------
 	//Plugin getPlugin(const std::string& name){
 
 	//}
-	
+
 }; // end namespace
 

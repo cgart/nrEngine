@@ -34,7 +34,8 @@ namespace nrEngine {
 	}
 
 	//-------------------------------------------------------------------------
-	Kernel::~Kernel(){
+	Kernel::~Kernel()
+    {
 		StopExecution();
 
 		taskList.clear();
@@ -133,7 +134,7 @@ namespace nrEngine {
 			if (!killed) it++;
 		}
 
-		// Now we yield the running thread, so that our system could still 
+		// Now we yield the running thread, so that our system could still
 		// response
 		IThread::yield();
 
