@@ -1,3 +1,26 @@
+The engine was written by me during my time as an undergrad, and now I decided to upload it to the public. I used it later during my PhD in several projects which helped me to build nice rendering demos showing our research results.
+
+
+Description:
+
+nrEngine is a small but powerfull game-application-engine. The engine does provide the developers with a low level functionality like resource managment, scripting, event system etc. A plugin framework allows to improve the functionality of the engine on the fly. The engine is written in Standard C++ and runs on all common platforms.
+
+The engine has been designed with the goal of providing the developers a simple but powerfull API. It is not designed to be a replacement but an enrichment in the development process of a game or any other application.
+
+Features
+
+Kernel/Task subsystem, see: KernelTask
+Resource managment, see: ResourceManagement
+Clock/Timer support
+Scripting system (incl. Plugin to handle  Lua scripts), see: ScriptSystem, LuaPlugin
+Event managment system, see: EventManagement
+Property managment system handling non-typed values
+Packages provide new features during compile-time (i.e. nrEngineGLFW, ...), see: EnginePackages
+Plugins extending features at run-time (i.e. lua scripting, ...), see: EnginePlugins
+
+
+Compilation:
+
 First you have to compile the engine:
 	make
 
@@ -7,6 +30,3 @@ if you want to install the engine later in a non default directory, then call
 To install engine type:
 	make install (to install into default directory /usr/local)
 	make INST_LOCATION=/path/to/install (to install into another directory)
-
-
-by problems contact me on arti_tevs@yahoo.de
